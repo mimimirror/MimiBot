@@ -32,7 +32,7 @@ cb_start = None
 
 sheet_name = "EoS Pinecone Mimi Test"
 
-def update_sheet(player, team, boss, damage):
+def update_sheet(player, team, boss, damage, bonus):
     info_sheet = gclient.open(sheet_name).sheet1
     names = info_sheet.col_values(4)
     row = -1
@@ -51,7 +51,7 @@ def update_sheet(player, team, boss, damage):
 
     day = get_day()
 
-    col = 2 * team + 1 + 6 * (day - 1)
+    col = 2 * team + 1 + 6 * (day - 1) + bonus
 
     cell_name = chr(64 + col) + str(row)
 
@@ -74,7 +74,8 @@ def get_cb_start_datetime(month, day, year):
 def get_day():
     now = datetime.datetime.now(datetime.timezone.utc)
     diff = now - cb_start
-    return diff.seconds // 3600 // 24 + 1 + diff.days
+    num_days = diff.seconds // 3600 // 24 + 1 + diff.days
+    return max(1, num_days)
 
 @client.event
 async def on_ready():
@@ -90,7 +91,7 @@ async def on_message(message):
         return
 
 
-    elif (message.channel.name == "edms-dungeon"):
+    elif (message.channel.name == "edms-dungeon" or message.channel.name == "cb-attack-channel"):
         #expected format: team X boss Y DAMAGE
         split_msg = message.content.split(" ")
         if len(split_msg) < 5 or split_msg[0].lower() != "team" or split_msg[2].lower() != "boss":
@@ -101,6 +102,9 @@ async def on_message(message):
                 team = int(split_msg[1])
                 boss = int(split_msg[3])
                 damage = int(split_msg[4].replace(',','').replace('.',''))
+                bonus = 0
+                if message.content.find("bonus") != -1:
+                    bonus = 1
 
                 if team < 1 or team > 3:
                     await message.channel.send("Team 1, 2, or 3 only please")
