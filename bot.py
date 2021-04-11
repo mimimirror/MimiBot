@@ -115,7 +115,7 @@ async def on_message(message):
             except:
                 await message.channel.send("EDM keeps me locked up, but even I know that's not a real number")
                 return
-            success, err = update_sheet(player, team, boss, damage)
+            success, err = update_sheet(player, team, boss, damage, bonus)
             if success:
                 await message.add_reaction('<:PecoSalute:792800585636249600>')
             else:
