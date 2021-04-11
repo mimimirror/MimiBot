@@ -23,6 +23,7 @@ gclient = gspread.authorize(creds)
 boss_red = [182, 249, 201, 234, 180]
 boss_green = [215, 203, 218, 153, 167]
 boss_blue = [168, 156, 248, 153, 214]
+sheet_num = 4
 
 # Some boilerplate discord bot stuff
 client = discord.Client()
@@ -46,7 +47,7 @@ def update_sheet(player, team, boss, damage):
     if row == -1:
         return (False, "Player " + player + " not found in sheet")
 
-    dmg_sheet = gclient.open(sheet_name).get_worksheet(2)
+    dmg_sheet = gclient.open(sheet_name).get_worksheet(sheet_num)
 
     day = get_day()
 
