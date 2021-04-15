@@ -31,6 +31,7 @@ client = discord.Client()
 cb_start = None
 
 sheet_name = "EoS Pinecone Mimi Test"
+worksheet_name = "CB3"
 
 def update_sheet(player, team, boss, damage, bonus):
     info_sheet = gclient.open(sheet_name).sheet1
@@ -47,7 +48,8 @@ def update_sheet(player, team, boss, damage, bonus):
     if row == -1:
         return (False, "Player " + player + " not found in sheet")
 
-    dmg_sheet = gclient.open(sheet_name).get_worksheet(sheet_num)
+    # dmg_sheet = gclient.open(sheet_name).get_worksheet(sheet_num)
+    dmg_sheet = gclient.open(sheet_name).worksheet(worksheet_name)
 
     day = get_day()
 
