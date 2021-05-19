@@ -85,7 +85,7 @@ def get_day():
 @client.event
 async def on_ready():
     global cb_start
-    cb_start = get_cb_start_datetime(5, 18, 2021)
+    cb_start = get_cb_start_datetime(5, 19, 2021)
     print("The bot is ready!")
 
 
