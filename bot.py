@@ -23,7 +23,6 @@ gclient = gspread.authorize(creds)
 boss_red = [182, 249, 201, 234, 180]
 boss_green = [215, 203, 218, 153, 167]
 boss_blue = [168, 156, 248, 153, 214]
-sheet_num = 4
 
 # Some boilerplate discord bot stuff
 client = discord.Client()
@@ -31,7 +30,7 @@ client = discord.Client()
 cb_start = None
 
 sheet_name = "EoS Pinecone Mimi Test"
-worksheet_name = "CB5"
+worksheet_name = "CB6"
 
 def update_sheet(player, team, boss, damage, bonus):
     info_sheet = gclient.open(sheet_name).sheet1
@@ -48,7 +47,6 @@ def update_sheet(player, team, boss, damage, bonus):
     if row == -1:
         return (False, "Player " + player + " not found in sheet")
 
-    # dmg_sheet = gclient.open(sheet_name).get_worksheet(sheet_num)
     dmg_sheet = gclient.open(sheet_name).worksheet(worksheet_name)
 
     day = get_day()
@@ -85,7 +83,7 @@ def get_day():
 @client.event
 async def on_ready():
     global cb_start
-    cb_start = get_cb_start_datetime(6, 23, 2021)
+    cb_start = get_cb_start_datetime(7, 25, 2021)
     print("The bot is ready!")
 
 
@@ -118,7 +116,7 @@ async def on_message(message):
                     await message.channel.send("Boss 1, 2, 3, 4, or 5 only please")
                     return
             except:
-                await message.channel.send("EDM keeps me locked up, but even I know that's not a real number")
+                await message.channel.send("EDM simps for me, but even I know that's not a real number")
                 return
             success, err = update_sheet(player, team, boss, damage, bonus)
             if success:
