@@ -34,7 +34,7 @@ worksheet_name = "CB7"
 
 def update_sheet(player, team, boss, damage, bonus):
     info_sheet = gclient.open(sheet_name).sheet1
-    names = info_sheet.col_values(4)
+    names = info_sheet.col_values(2)
     row = -1
 
     for i in range(len(names)):
