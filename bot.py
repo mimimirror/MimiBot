@@ -42,7 +42,7 @@ def update_sheet(player, team, boss, damage, bonus):
         if "#" in name:
             name = name[:name.index("#")]
         if name == player:
-            row = i + 2
+            row = i + 1
 
     if row == -1:
         return (False, "Player " + player + " not found in sheet")
