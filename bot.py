@@ -30,7 +30,17 @@ client = discord.Client()
 cb_start = None
 
 sheet_name = "EoS Pinecone Mimi Test"
-worksheet_name = "CB10"
+
+### EDIT THIS PART EVERY CB ###
+
+@client.event
+async def on_ready():
+    global cb_start
+    cb_start = get_cb_start_datetime(12, 15, 2021)
+    print("The bot is ready!")
+worksheet_name = "CB11"
+
+### END PART ###
 
 def update_sheet(player, team, boss, damage, bonus):
     info_sheet = gclient.open(sheet_name).sheet1
@@ -79,13 +89,6 @@ def get_day():
     diff = now - cb_start
     num_days = diff.seconds // 3600 // 24 + 1 + diff.days
     return max(1, num_days)
-
-@client.event
-async def on_ready():
-    global cb_start
-    cb_start = get_cb_start_datetime(11, 17, 2021)
-    print("The bot is ready!")
-
 
 @client.event
 async def on_message(message):
