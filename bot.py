@@ -63,7 +63,7 @@ def update_sheet(player, team, boss, damage, bonus):
 
     col = 2 * team + 1 + 6 * (day - 1) + bonus
 
-    cell_name = chr(64 + col%26) + str(row)
+    cell_name = chr(65 + (col - 1)%26) + str(row)
     
     if col > 26:
         cell_name = "A" + cell_name
