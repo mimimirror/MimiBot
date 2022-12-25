@@ -36,9 +36,9 @@ sheet_name = "EoS Pinecone Mimi Test"
 @client.event
 async def on_ready():
     global cb_start
-    cb_start = get_cb_start_datetime(11, 25, 2022)
+    cb_start = get_cb_start_datetime(12, 26, 2022)
     print("The bot is ready!")
-worksheet_name = "CB22"
+worksheet_name = "CB23"
 
 ### END PART ###
 
